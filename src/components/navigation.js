@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./navigation.css";
 import logo from '../logo.svg';
 import Search from '../icons/search.js';
@@ -55,19 +57,34 @@ function NavAnimation(){
     );
 }
 
-export default function Navigation() {
+function SearchForm(f){
+    var val = "";
+    const handleChange = (e) => {
+        e.preventDefault();
+        val = e.target.value;
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (val!=="") f.setsearchval(val);
+    }
+    return(
+        <form className="h-2/4 ml-auto flex items-center text-white min-w-max">
+            <input type="search" className="input-nobg h-2/4 ml-4 px-1 rounded backdrop-blur" id="search" placeholder="Search..." onChange={handleChange} />
+            <button type="submit" className="h-2/4 bg-white bg-opacity-30 ml-1 px-2 py-1 rounded hover:bg-opacity-50 backdrop-blur" id="submit" onClick={handleSubmit}>
+                <Search color="white" />
+            </button>
+        </form>
+    );
+  }
+
+export default function Navigation(f) {
     return (
-    <nav className=" h-20v relative">
+    <nav className="h-20v relative flex justify-center">
         <NavAnimation />
-        <div className="flex h-full min-w-max items-center px-4">
+        <div className="flex h-full min-w-max w-3/4 max-w-3xl items-center">
             <img src={logo} className="inline-block- h-2/4 hidden" alt="logo" />
             <span className="font-serif text-white">AllWeather</span>
-            <form className="h-2/4 ml-auto flex items-center text-white min-w-max">
-                <input type="search" className="input-nobg h-2/4 ml-4 px-1 rounded backdrop-blur" id="search" placeholder="Search..." />
-                <button type="submit" className="h-2/4 bg-white bg-opacity-30 ml-1 px-2 py-1 rounded hover:bg-opacity-50 backdrop-blur" id="submit">
-                    <Search color="white" />
-                </button>
-            </form>
+            <SearchForm setsearchval={f.setsearchval}/>
         </div>
     </nav>
     );
