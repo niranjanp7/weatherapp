@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) ammap.com | SVG weather icons -->
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="64"
+    height="64"
+    viewbox="0 0 64 64">
+    <defs>
+        <filter id="blur" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="0" dy="4" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.05"/>
+            </feComponentTransfer>
+            <feMerge> 
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/> 
+            </feMerge>
+        </filter>
+        <style type="text/css">
+
+@keyframes giggle-1 {
+  0% {
+    -webkit-transform: translate(0px,0px);
+       -moz-transform: translate(0px,0px);
+        -ms-transform: translate(0px,0px);
+            transform: translate(0px,0px);
+  }
+
+  50% {
+    -webkit-transform: translate(2px,0px);
+       -moz-transform: translate(2px,0px);
+        -ms-transform: translate(2px,0px);
+            transform: translate(2px,0px);
+  }
+
+  100% {
+    -webkit-transform: translate(0px,0px);
+       -moz-transform: translate(0px,0px);
+        -ms-transform: translate(0px,0px);
+            transform: translate(0px,0px);
+  }
+}
+@keyframes giggle-2 {
+  0% {
+    -webkit-transform: translate(0px,0px);
+       -moz-transform: translate(0px,0px);
+        -ms-transform: translate(0px,0px);
+            transform: translate(0px,0px);
+  }
+
+  50% {
+    -webkit-transform: translate(-2px,0px);
+       -moz-transform: translate(-2px,0px);
+        -ms-transform: translate(-2px,0px);
+            transform: translate(-2px,0px);
+  }
+
+  100% {
+    -webkit-transform: translate(0px,0px);
+       -moz-transform: translate(0px,0px);
+        -ms-transform: translate(0px,0px);
+            transform: translate(0px,0px);
+  }
+}
+
+.giggle-1,
+.giggle-2 {
+  -webkit-animation-duration: 3s;
+     -moz-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+     -moz-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.giggle-1 {
+    -webkit-animation-name: giggle-1;
+        -moz-animation-name: giggle-1;
+            animation-name: giggle-1;
+}
+
+.giggle-2 {
+    -webkit-animation-name: giggle-2;
+        -moz-animation-name: giggle-2;
+            animation-name: giggle-2;
+}
+
+    </style>
+    </defs>
+    <g filter="url(#blur)" id="snowy-6" stroke="white" stroke-linejoin="round" stroke-width="3" stroke-linecap="round">
+        <g transform="translate(15,15)">
+            <g class="giggle-1">
+                <path d="M0,0L8,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M16,0L35,0" />
+            </g>
+        </g>
+        <g transform="translate(10,20)">
+            <g class="giggle-2">
+                <path d="M0,0L20,0" />
+            </g>
+            <g class="giggle-1">
+                <path d="M24,0L28,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M36,0L46,0" />
+            </g>
+        </g>
+        <g transform="translate(15,25)">
+            <g class="giggle-1">
+                <path d="M0,0L19,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M27,0L35,0" />
+            </g>
+        </g>
+        <g transform="translate(10,30)">
+            <g class="giggle-2">
+                <path d="M0,0L8,0" />
+            </g>
+            <g class="giggle-1">
+                <path d="M12,0L30,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M38,0L46,0" />
+            </g>
+        </g>
+        <g transform="translate(15,35)">
+            <g class="giggle-2">
+                <path d="M0,0L16,0" />
+            </g>
+            <g class="giggle-1">
+                <path d="M20,0L35,0" />
+            </g>
+        </g>
+        <g transform="translate(10,40)">
+            <g class="giggle-1">
+                <path d="M0,0L8,0" />
+            </g>
+            <g class="giggle-1">
+                <path d="M15,0L30,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M38,0L46,0" />
+            </g>
+        </g>
+        <g transform="translate(15,45)">
+            <g class="giggle-1">
+                <path d="M0,0L4,0" />
+            </g>
+            <g class="giggle-2">
+                <path d="M12,0L35,0" />
+            </g>
+        </g>
+    </g>
+</svg>
