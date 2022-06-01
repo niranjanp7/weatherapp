@@ -66,6 +66,7 @@ export default function Generate(r) {
                 <div className="h-[calc(100%_/_6_-_4px)] w-full bg-black bg-opacity-10 text-2xl flex items-center px-4 mb-[4px] rounded-tl-[inherit] rounded-tr-[inherit]">
                     {basic.name}, {basic.country}
                     <span className="ml-2 text-lg">(&nbsp;{basic.coord[0]}N,&nbsp;{basic.coord[1]}E&nbsp;)</span>
+                    {r.countDown}
                 </div>
                 <div className="h-5/6 w-[calc(100%_/_3_-_2px)] bg-black bg-opacity-10 rounded-bl-[inherit] p-1">
                     <div className="h-2/5 w-full relative">
