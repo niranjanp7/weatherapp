@@ -68,7 +68,7 @@ function SearchForm(f) {
         if (val !== "") f.setsearchval(val);
     };
     return (
-        <form className="h-2/4 ml-auto flex items-center text-white min-w-max">
+        <form className="h-2/4 sm:ml-auto flex items-center text-white min-w-max">
             <input
                 type="search"
                 className="input-nobg h-2/4 ml-4 px-1 rounded backdrop-blur"
@@ -92,9 +92,11 @@ export default function Navigation(f) {
     return (
         <nav className="h-20v relative flex justify-center">
             <NavAnimation />
-            <div className="flex h-full min-w-max w-3/4 max-w-3xl items-center">
-                <img src={logo} className="inline-block- h-2/4 hidden" alt="logo" />
-                <span className="font-serif text-white">AllWeather</span>
+            <div className="flex flex-col h-full min-w-max w-3/4 max-w-3xl items-center sm:flex-row">
+                <div className="flex items-center">
+                    <img src={logo} className="inline-block- h-2/4" alt="logo" />
+                    <span className="font-serif text-white">AllWeather</span>
+                </div>
                 <SearchForm setsearchval={f.setsearchval} />
             </div>
         </nav>

@@ -4,7 +4,7 @@ import Generate from "./result";
 class Api extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: { e: 0 }, status: true, querry: this.props.search, countDown: 10 };
+        this.state = { data: {}, status: true, querry: this.props.search, countDown: 10, loading: false };
     }
     componentDidMount() {
         this.timerID = setInterval(() => this.tick(), 1000);
@@ -22,6 +22,7 @@ class Api extends React.Component {
             this.setState({ countDown: 10 });
         }
         if (this.state.countDown === 0) {
+            this.setState({ loading: true });
             this.getData();
         }
     }
@@ -29,7 +30,6 @@ class Api extends React.Component {
         if (this.props.search !== this.state.querry) {
             this.setState({ querry: this.props.search });
             this.getData();
-            this.setState({ countDown: 10 });
         }
     }
     getData() {
@@ -45,24 +45,22 @@ class Api extends React.Component {
                 .then((res) => res.json())
                 .then((r) => {
                     this.setState({ data: r, status: true });
+                })
+                .finally(() => {
+                    this.setState({ loading: false, countDown: 10 });
                 });
         }
     }
     render() {
         return (
-            <main className="relative flex justify-center items-center h-60v bg-gradient-to-b from-sky-300 to-sky-700">
-                <div className="h-3/4 w-3/4 max-w-3xl bg-white bg-opacity-20 rounded-xl z-10 px-4 hidden justify-center items-center text-3xl text-white">
-                    {this.state.status ? "Online!" : "Offline"}
-                </div>
-                <Generate data={this.state.data} search={this.props.search} countDown={this.state.countDown} />
-                <div
-                    className={
-                        "absolute top-0 left-0 w-full h-full bg-red-600 bg-opacity-50 z-10" +
-                        (this.state.status ? " hidden" : " block")
-                    }
-                >
-                    No Network
-                </div>
+            <main className="relative flex justify-center items-center h-60v bg-gradient-to-b from-sky-300 to-sky-700 px-1">
+                <Generate
+                    data={this.state.data}
+                    search={this.props.search}
+                    countDown={this.state.countDown}
+                    status={this.state.status}
+                    loading={this.state.loading}
+                />
             </main>
         );
     }

@@ -3,7 +3,7 @@ import arrowup from '../image/arrowup.png';
 
 export default function Welcome() {
     return (
-        <div className="h-3/4 w-3/4 max-w-3xl bg-black bg-opacity-10 rounded-xl z-10 flex items-center">
+        <div className="h-full sm:h-3/4 w-full md:w-3/4 max-w-3xl bg-black bg-opacity-10 rounded-xl z-10 flex items-center">
             <div className="h-full w-3/4 flex flex-col justify-center items-center text-center text-white text-xl">
                 Welcome to<br />
                 AllWeather App<br />
