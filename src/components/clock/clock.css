@@ -36,7 +36,7 @@
     position: absolute;
     top: 50%;
     transform-origin: 50% 0%;
-    transform: rotate(calc(var(--i) * 6deg)) translateY(100%) rotate(calc(-6deg * var(--i))) rotateZ(calc(calc(60 - var(--i)) * -6deg + 180deg));
+    transform: rotate(calc(var(--i) * 6deg)) translateY(100%) rotate(180deg);
 }
 
 .clock .minute-ind:nth-child(5n+1) {
