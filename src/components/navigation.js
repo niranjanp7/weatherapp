@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./navigation.css";
+import { Suggestion } from "./database/suggestion.js";
 import logo from "../logo.svg";
 import Search from "../icons/search.js";
 import Cloud from "../icons/cloud.js";
@@ -57,30 +58,42 @@ function NavAnimation() {
     );
 }
 
-function SearchForm(f) {
-    var val = "";
-    const handleChange = (e) => {
+function SearchForm({ handleChange, handleSubmit, selectSuggestion, inputVal }) {
+    const handleValChange = (e) => {
         e.preventDefault();
-        val = e.target.value;
+        handleChange(e.target.value);
     };
-    const handleSubmit = (e) => {
+    const handleValSubmit = (e) => {
         e.preventDefault();
-        if (val !== "") f.setsearchval(val);
+        handleSubmit();
+    };
+    const handleSuggestionSelect = (city, country) => {
+        let c = country.split(" ");
+        if (c.length > 1) {
+            country = (c[0][0] + c[1][0]).toUpperCase();
+        } else {
+            country = country.slice(0, 2).toUpperCase();
+        }
+        selectSuggestion(city + "," + country);
     };
     return (
         <form className="h-2/4 sm:ml-auto flex items-center text-white min-w-max">
-            <input
-                type="search"
-                className="input-nobg h-2/4 ml-4 px-1 rounded backdrop-blur"
-                id="search"
-                placeholder="Search..."
-                onChange={handleChange}
-            />
+            <div className="h-2/4 flex items-center relative">
+                <input
+                    type="search"
+                    className="input-nobg h-full px-1 rounded backdrop-blur"
+                    value={inputVal}
+                    placeholder="Search..."
+                    onChange={handleValChange}
+                />
+                {/* <div className="absolute w-full z-20 top-full bg-black" id="suggestionBox"></div> */}
+                <Suggestion keyword={inputVal} selectFun={handleSuggestionSelect} />
+            </div>
             <button
                 type="submit"
                 className="h-2/4 bg-white bg-opacity-30 ml-1 px-2 py-1 rounded hover:bg-opacity-50 backdrop-blur"
                 id="submit"
-                onClick={handleSubmit}
+                onClick={handleValSubmit}
             >
                 <Search color="white" />
             </button>
@@ -88,17 +101,47 @@ function SearchForm(f) {
     );
 }
 
-export default function Navigation(f) {
-    return (
-        <nav className="h-20v relative flex justify-center">
-            <NavAnimation />
-            <div className="flex flex-col h-full min-w-max w-3/4 max-w-3xl items-center sm:flex-row">
-                <div className="flex items-center">
-                    <img src={logo} className="inline-block- h-2/4" alt="logo" />
-                    <span className="font-serif text-white">AllWeather</span>
+class Navigation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { inputVal: "" };
+    }
+
+    handleChange(val) {
+        this.setState({ inputVal: val });
+    }
+
+    handleSubmit() {
+        if (this.state.inputVal !== "") {
+            this.props.setsearchval(this.state.inputVal);
+            this.setState({ inputVal: "" });
+        }
+    }
+
+    selectSuggestion(val) {
+        this.setState({ inputVal: "" });
+        this.props.setsearchval(val);
+    }
+
+    render() {
+        return (
+            <nav className="h-20v relative flex justify-center">
+                <NavAnimation />
+                <div className="flex flex-col h-full min-w-max w-3/4 max-w-3xl items-center sm:flex-row">
+                    <div className="flex items-center">
+                        <img src={logo} className="inline-block- h-2/4" alt="logo" />
+                        <span className="font-serif text-white">AllWeather</span>
+                    </div>
+                    <SearchForm
+                        handleChange={this.handleChange.bind(this)}
+                        handleSubmit={this.handleSubmit.bind(this)}
+                        selectSuggestion={this.selectSuggestion.bind(this)}
+                        inputVal={this.state.inputVal}
+                    />
                 </div>
-                <SearchForm setsearchval={f.setsearchval} />
-            </div>
-        </nav>
-    );
+            </nav>
+        );
+    }
 }
+
+export default Navigation;
