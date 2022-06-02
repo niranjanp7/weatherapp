@@ -1,5 +1,15 @@
 import React from "react";
+
+/**
+ * The JSON File contains:
+ *      74861 City-Contry pairs
+ *      152 Countries
+ *
+ * Data from sevelar cities and countries are not aviailable on OpenWeatherMap (API Used in this project)
+ */
 import countries from "./countries.min.json";
+
+import "./suggestion.css";
 
 function getMatches(keyword, selectFun) {
     let MAX_SUGGESTIONS = 50;
@@ -58,7 +68,7 @@ export function Suggestion({ keyword, selectFun }) {
 
     return (
         <div
-            className="absolute max-h-[80vh] w-full min-w-max z-20 top-full sm:right-0 px-1 bg-sky-800 rounded divide-y overflow-y-auto"
+            className="absolute max-h-[80vh] w-full min-w-max z-20 top-full sm:right-0 px-1 bg-sky-800 rounded divide-y overflow-y-auto scroll-bar"
             id="suggestionBox"
         >
             {suggestions}
