@@ -46,6 +46,7 @@ function getMatches(keyword, selectFun) {
 }
 
 export function Suggestion({ keyword, selectFun }) {
+    keyword = keyword.trim();
     if (keyword === "") {
         return <></>;
     }

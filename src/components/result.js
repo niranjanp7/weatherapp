@@ -28,8 +28,10 @@ const DegToCard = (D) => {
 };
 
 export default function Generate(r) {
-    if ((Object.keys(r.data).length === 0) | (r.search === "")) return <Welcome />;
-    if (r.data?.cod === '404')
+    if ((Object.keys(r.data).length === 0) | (r.search === "")) {
+        return <Welcome loading={r.loading} />;
+    }
+    if (r.data?.cod === "404")
         return (
             <div className="h-full sm:h-3/4 w-full md:w-3/4 max-w-3xl bg-black bg-opacity-10 rounded-xl z-10 px-4 flex justify-center items-center text-3xl text-white capitalize">
                 {r.data.message}

@@ -15,6 +15,9 @@ class Api extends React.Component {
         clearInterval(this.refreshQuerryID);
     }
     tick() {
+        if (this.props.search === "") {
+            return;
+        }
         this.setState({
             countDown: this.state.countDown - 1,
         });
@@ -28,7 +31,7 @@ class Api extends React.Component {
     }
     refreshQuerry() {
         if (this.props.search !== this.state.querry) {
-            this.setState({ querry: this.props.search });
+            this.setState({ querry: this.props.search, loading: true });
             this.getData();
         }
     }
