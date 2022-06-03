@@ -2,7 +2,7 @@ import React from "react";
 
 import Welcome from "./welcome.js";
 import WeatherIcon from "./weathericon.js";
-import Clock from "./clock/clock_.js";
+import Clock from "./clock/clock.js";
 
 import "./result.css";
 
@@ -15,7 +15,6 @@ import waves_arrow_up_icon from "../icons/waves-arrow-up.svg";
 import navigation_icon from "../icons/navigation.svg";
 import sunrise_icon from "../icons/sunrise.svg";
 import sunset_icon from "../icons/sunset.svg";
-import timezone_icon from "../icons/timezone.svg";
 import wifi_off from "../icons/wifi-off.svg";
 import loader from "../icons/loader.svg";
 
@@ -58,10 +57,14 @@ export default function Generate(r) {
             speed: r.data.wind.speed,
             deg: r.data.wind.deg,
         };
-        const time = {
-            sunrise: new Date(r.data.sys.sunrise * 1000),
-            sunset: new Date(r.data.sys.sunset * 1000),
+        const timezone = {
             timezone: new Date(r.data.timezone * 1000),
+            offset: new Date().getTimezoneOffset() * 60000,
+        };
+        const utc = (timezone.timezone.getUTCHours() + timezone.timezone.getUTCMinutes() / 60) * 3600000;
+        const time = {
+            sunrise: new Date(r.data.sys.sunrise * 1000 + timezone.offset + utc),
+            sunset: new Date(r.data.sys.sunset * 1000 + timezone.offset + utc),
         };
         const timeformat = {
             sunrise:
@@ -80,14 +83,10 @@ export default function Generate(r) {
                 (time.sunset.getHours() < 12 ? " AM" : " PM"),
             timezone:
                 "GMT" +
-                (time.timezone.getUTCHours() <= 12 ? "+" : "-") +
-                (time.timezone.getUTCHours() % 12) +
+                (timezone.timezone.getUTCHours() <= 12 ? "+" : "-") +
+                (timezone.timezone.getUTCHours() % 12) +
                 ":" +
-                time.timezone.getUTCMinutes(),
-            utc: {
-                hour: time.timezone.getUTCHours(),
-                minute: time.timezone.getUTCMinutes(),
-            },
+                timezone.timezone.getUTCMinutes(),
         };
         return (
             <div className="h-full sm:h-3/4 md:w-3/4 max-w-3xl rounded-xl z-10 flex flex-wrap text-white text-lg shadow-inset">
@@ -96,7 +95,7 @@ export default function Generate(r) {
                     <span className="ml-2 text-lg">
                         (&nbsp;{basic.coord[0]}N,&nbsp;{basic.coord[1]}E&nbsp;)
                     </span>
-                    <img src={loader} className={"ml-2 " + (r.loading ? "initial" : "hidden")} />
+                    <img src={loader} className={"ml-2 " + (r.loading ? "initial" : "hidden")} alt="loader" />
                     <span className="ml-auto text-cyan-200">
                         {r.countDown}
                         <img
@@ -211,13 +210,16 @@ export default function Generate(r) {
                     </div>
                     <div className="h-3/5 w-full">
                         <div className="h-full w-full flex justify-center">
-                            {/* <img src={timezone_icon} className="h-full w-full" alt="timezone icon" /> */}
-                            <Clock gmt={timeformat.timezone} utc={timeformat.utc} />
-                            {/* <div className="inline-block">{timeformat.timezone}</div> */}
+                            <Clock gmt={timeformat.timezone} utc={utc} />
                         </div>
                     </div>
                 </div>
             </div>
         );
-    }
+    } else
+        return (
+            <div className="h-full sm:h-3/4 w-full md:w-3/4 max-w-3xl bg-black bg-opacity-10 rounded-xl z-10 px-4 flex justify-center items-center text-3xl text-white text-center">
+                {r.data.message}
+            </div>
+        );
 }

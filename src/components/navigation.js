@@ -67,14 +67,8 @@ function SearchForm({ handleChange, handleSubmit, selectSuggestion, inputVal }) 
         e.preventDefault();
         handleSubmit();
     };
-    const handleSuggestionSelect = (city, country) => {
-        let c = country.split(" ");
-        if (c.length > 1) {
-            country = (c[0][0] + c[1][0]).toUpperCase();
-        } else {
-            country = country.slice(0, 2).toUpperCase();
-        }
-        selectSuggestion(city + "," + country);
+    const handleSuggestionSelect = (city, code) => {
+        selectSuggestion(city + "," + code);
     };
     return (
         <form className="h-2/4 sm:ml-auto flex items-center text-white min-w-max">

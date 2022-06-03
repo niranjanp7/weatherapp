@@ -17,17 +17,18 @@ function getMatches(keyword, selectFun) {
     let suggestions = new Set();
 
     for (let i in countries) {
-        if (i.toLowerCase().includes(keyword.toLowerCase())) {
+        let [country, code] = [...i.split("_")];
+        if (country.toLowerCase().includes(keyword.toLowerCase())) {
             suggestions.add(
                 <button
                     type="button"
                     className="block w-full text-left hover:bg-sky-900 p-1"
                     key={i}
                     onClick={() => {
-                        selectFun(i, i);
+                        selectFun(country, code);
                     }}
                 >
-                    {i}
+                    {country}
                 </button>
             );
         }
@@ -39,10 +40,10 @@ function getMatches(keyword, selectFun) {
                         className="block w-full text-left hover:bg-sky-900 p-1"
                         key={i + "_" + j}
                         onClick={() => {
-                            selectFun(j, i);
+                            selectFun(j, code);
                         }}
                     >
-                        {j + ", " + i}
+                        {j + ", " + country}
                     </button>
                 );
             }
