@@ -2,6 +2,7 @@ import React from "react";
 
 import Welcome from "./welcome.js";
 import WeatherIcon from "./weathericon.js";
+import Clock from "./clock/clock_.js";
 
 import "./result.css";
 
@@ -83,6 +84,10 @@ export default function Generate(r) {
                 (time.timezone.getUTCHours() % 12) +
                 ":" +
                 time.timezone.getUTCMinutes(),
+            utc: {
+                hour: time.timezone.getUTCHours(),
+                minute: time.timezone.getUTCMinutes(),
+            },
         };
         return (
             <div className="h-full sm:h-3/4 md:w-3/4 max-w-3xl rounded-xl z-10 flex flex-wrap text-white text-lg shadow-inset">
@@ -186,8 +191,8 @@ export default function Generate(r) {
                     </div>
                 </div>
                 <div className="h-5/6 w-[calc(100%_/_3_-_2px)] bg-black bg-opacity-10 rounded-br-[inherit] p-1">
-                    <div className="h-1/3 w-full flex items-center">
-                        <div className="h-2/3 w-1/2">
+                    <div className="h-1/5 w-full flex items-center">
+                        <div className="h-full w-1/2">
                             <img src={sunrise_icon} className="h-full w-full" alt="sunrise icon" />
                         </div>
                         <div className="w-1/2 flex flex-col">
@@ -195,8 +200,8 @@ export default function Generate(r) {
                             <div>{timeformat.sunrise}</div>
                         </div>
                     </div>
-                    <div className="h-1/3 w-full flex items-center">
-                        <div className="h-2/3 w-1/2">
+                    <div className="h-1/5 w-full flex items-center">
+                        <div className="h-full w-1/2">
                             <img src={sunset_icon} className="h-full w-full" alt="sunset icon" />
                         </div>
                         <div className="w-1/2 flex flex-col">
@@ -204,13 +209,11 @@ export default function Generate(r) {
                             <div>{timeformat.sunset}</div>
                         </div>
                     </div>
-                    <div className="h-1/3 w-full flex items-center">
-                        <div className="h-2/3 w-1/2">
-                            <img src={timezone_icon} className="h-full w-full" alt="timezone icon" />
-                        </div>
-                        <div className="w-1/2 flex flex-col">
-                            <div>Timezone</div>
-                            <div>{timeformat.timezone}</div>
+                    <div className="h-3/5 w-full">
+                        <div className="h-full w-full flex justify-center">
+                            {/* <img src={timezone_icon} className="h-full w-full" alt="timezone icon" /> */}
+                            <Clock gmt={timeformat.timezone} utc={timeformat.utc} />
+                            {/* <div className="inline-block">{timeformat.timezone}</div> */}
                         </div>
                     </div>
                 </div>
