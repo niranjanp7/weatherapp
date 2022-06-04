@@ -245,6 +245,11 @@ export default function Generate(r) {
                             r.changeCard(2);
                         }}
                     >
+                        <div className="h-3/5 w-full card-head flex items-center">
+                            <div className="w-full max-h-full aspect-square flex justify-center">
+                                <Clock gmt={timeformat.timezone} utc={utc} />
+                            </div>
+                        </div>
                         <div className="h-1/5 w-full flex items-center card-body">
                             <div className="h-full w-1/2">
                                 <img src={sunrise_icon} className="h-full w-full" alt="sunrise icon" />
@@ -261,11 +266,6 @@ export default function Generate(r) {
                             <div className="w-1/2 flex flex-col">
                                 <div>Sunset</div>
                                 <div>{timeformat.sunset}</div>
-                            </div>
-                        </div>
-                        <div className="h-3/5 w-full card-head flex items-center">
-                            <div className="w-full max-h-full aspect-square flex justify-center">
-                                <Clock gmt={timeformat.timezone} utc={utc} />
                             </div>
                         </div>
                     </div>

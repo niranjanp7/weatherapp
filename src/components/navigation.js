@@ -79,6 +79,7 @@ function SearchForm({ handleChange, handleSubmit, selectSuggestion, inputVal }) 
                     value={inputVal}
                     placeholder="Search..."
                     onChange={handleValChange}
+                    autoFocus={true}
                 />
                 {/* <div className="absolute w-full z-20 top-full bg-black" id="suggestionBox"></div> */}
                 <Suggestion keyword={inputVal} selectFun={handleSuggestionSelect} />

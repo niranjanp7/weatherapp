@@ -1,10 +1,12 @@
 import React from "react";
+
+import ClockField from "./clockField.js";
 import "./clock.css";
 
 class Clock extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hour: 0, minute: 0, second: 0};
+        this.state = { hour: 0, minute: 0, second: 0 };
     }
 
     componentDidMount() {
@@ -17,10 +19,7 @@ class Clock extends React.Component {
 
     clockTick() {
         const time = new Date();
-        time.setTime(
-            time.getTime() +
-                time.getTimezoneOffset() * 60000 + this.props.utc
-        );
+        time.setTime(time.getTime() + time.getTimezoneOffset() * 60000 + this.props.utc);
 
         this.setState({ hour: time.getHours(), minute: time.getMinutes(), second: time.getSeconds() });
     }
@@ -91,8 +90,12 @@ class Clock extends React.Component {
                 <div className="minute-ind" style={{ "--i": 57 }}></div>
                 <div className="minute-ind" style={{ "--i": 58 }}></div>
                 <div className="minute-ind" style={{ "--i": 59 }}></div>
-                <div className="gmt">{this.props.gmt}</div>
-                <div className="time-period">{hour < 12 ? "AM" : "PM"}</div>
+                <div className="gmt">
+                    <ClockField text={this.props.gmt} width="110" textLeft="10" />
+                </div>
+                <div className="time-period">
+                    <ClockField text={hour < 12 ? "AM" : "PM"} width="50" textLeft="14" />
+                    </div>
                 <div
                     className="hour-hand"
                     style={{

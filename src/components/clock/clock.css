@@ -81,13 +81,9 @@
 .time-period {
     position: absolute;
     top: 58%;
-    font-size: 1em;
-    background-image: linear-gradient(135deg, #066293, #6fc7f1);
-    border-radius: 10rem;
-    padding-inline: .5rem;
-    box-shadow: 0 0 .5em .1em #000a inset;
+    height: 15%;
 }
 
 .gmt {
-    top: 25%;
+    top: 26%;
 }
