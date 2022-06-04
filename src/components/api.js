@@ -4,7 +4,14 @@ import Generate from "./result";
 class Api extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: {}, status: true, querry: this.props.search, countDown: 10, loading: false };
+        this.state = {
+            data: {},
+            status: true,
+            querry: this.props.search,
+            countDown: 10,
+            loading: false,
+            cardActive: 0,
+        };
     }
     componentDidMount() {
         this.timerID = setInterval(() => this.tick(), 1000);
@@ -54,6 +61,9 @@ class Api extends React.Component {
                 });
         }
     }
+    changeCard(num) {
+        this.setState({ cardActive: num });
+    }
     render() {
         return (
             <main className="relative flex justify-center items-center h-60v bg-gradient-to-b from-sky-300 to-sky-700 px-1">
@@ -63,6 +73,8 @@ class Api extends React.Component {
                     countDown={this.state.countDown}
                     status={this.state.status}
                     loading={this.state.loading}
+                    cardActive={this.state.cardActive}
+                    changeCard={this.changeCard.bind(this)}
                 />
             </main>
         );
